@@ -1,0 +1,226 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-tables
+      author: AlexShcheglov
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: integer
+                  autoIncrement: true
+                  constraints:
+                    primeryKey: true
+                    primaryKeyName: pk_users
+                    nullable: false
+                    unique: true
+
+              - column:
+                  name: email
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: password
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: login
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: events
+            columns:
+              - column:
+                  name: id
+                  type: integer
+                  autoIncrement: true
+                  constraints:
+                    primeryKey: true
+                    primaryKeyName: pk_events
+                    nullable: false
+                    unique: true
+
+              - column:
+                  name: name
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: notes
+            columns:
+              - column:
+                  name: id
+                  type: integer
+                  autoIncrement: true
+                  constraints:
+                    primeryKey: true
+                    primaryKeyName: pk_notes
+                    nullable: false
+                    unique: true
+
+              - column:
+                  name: name
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: note
+                  type: varchar(500)
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: event_id
+                  type: integer
+                  constraints:
+                    references: events(id)
+                    foreignKeyName: fk_notes_events
+                    nullable: false
+
+        - createTable:
+            tableName: to_do_lists
+            columns:
+              - column:
+                  name: id
+                  type: integer
+                  autoIncrement: true
+                  constraints:
+                    primeryKey: true
+                    primaryKeyName: pk_toDoLists
+                    nullable: false
+                    unique: true
+
+              - column:
+                  name: name
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: to_do_list
+                  type: varchar(500)
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: event_id
+                  type: integer
+                  constraints:
+                    references: events(id)
+                    foreignKeyName: fk_toDoLists_events
+                    nullable: false
+
+        - createTable:
+            tableName: users_notes
+            columns:
+              - column:
+                  name: user_id
+                  type: integer
+                  constraints:
+                    references: users(id)
+                    foreignKeyName: fk_usersNotesUserId_users
+                    nullable: false
+
+              - column:
+                  name: note_id
+                  type: integer
+                  constraints:
+                    references: notes(id)
+                    foreignKeyName: fk_usersNotesNoteId_notes
+                    nullable: false
+
+              - column:
+                  name: role
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: users_events
+            columns:
+              - column:
+                  name: user_id
+                  type: integer
+                  constraints:
+                    references: users(id)
+                    foreignKeyName: fk_usersEventsUserId_users
+                    nullable: false
+
+              - column:
+                  name: event_id
+                  type: integer
+                  constraints:
+                    references: events(id)
+                    foreignKeyName: fk_usersEventsEventId_events
+                    nullable: false
+
+              - column:
+                  name: role
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: users_to_do_lists
+            columns:
+              - column:
+                  name: user_id
+                  type: integer
+                  constraints:
+                    references: users(id)
+                    foreignKeyName: fk_usersNotesUserId_users
+                    nullable: false
+
+              - column:
+                  name: to_do_list_id
+                  type: integer
+                  constraints:
+                    references: to_do_lists(id)
+                    foreignKeyName: fk_usersToDoListsToDoList_toDoLists
+                    nullable: false
+
+              - column:
+                  name: role
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: favorite_users
+            columns:
+              - column:
+                  name: owner_id
+                  type: integer
+                  constraints:
+                    references: users(id)
+                    foreignKeyName: fk_favoriteUsersOwner_users
+                    nullable: false
+
+              - column:
+                  name: favorite_id
+                  type: integer
+                  constraints:
+                    references: users(id)
+                    foreignKeyName: fk_favoriteUsersFavorite_users
+                    nullable: false
+
+              - column:
+                  name: tag
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
