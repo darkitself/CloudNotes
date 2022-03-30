@@ -18,19 +18,19 @@ databaseChangeLog:
 
               - column:
                   name: email
-                  type: varchar(30)
+                  type: varchar
                   constraints:
                     nullable: false
 
               - column:
                   name: password
-                  type: varchar(30)
+                  type: varchar
                   constraints:
                     nullable: false
 
               - column:
                   name: login
-                  type: varchar(30)
+                  type: varchar
                   constraints:
                     nullable: false
 
@@ -49,7 +49,7 @@ databaseChangeLog:
 
               - column:
                   name: name
-                  type: varchar(30)
+                  type: varchar
                   constraints:
                     nullable: false
 
@@ -74,13 +74,13 @@ databaseChangeLog:
 
               - column:
                   name: name
-                  type: varchar(30)
+                  type: varchar
                   constraints:
                     nullable: false
 
               - column:
                   name: note
-                  type: varchar(500)
+                  type: varchar
                   constraints:
                     nullable: true
 
@@ -107,13 +107,13 @@ databaseChangeLog:
 
               - column:
                   name: name
-                  type: varchar(30)
+                  type: varchar
                   constraints:
                     nullable: false
 
               - column:
                   name: to_do_list
-                  type: varchar(500)
+                  type: varchar
                   constraints:
                     nullable: true
 
@@ -128,6 +128,16 @@ databaseChangeLog:
         - createTable:
             tableName: users_notes
             columns:
+              - column:
+                  name: id
+                  type: integer
+                  autoIncrement: true
+                  constraints:
+                    primeryKey: true
+                    primaryKeyName: pk_users
+                    nullable: false
+                    unique: true
+
               - column:
                   name: user_id
                   type: integer
@@ -146,13 +156,23 @@ databaseChangeLog:
 
               - column:
                   name: role
-                  type: varchar(30)
+                  type: varchar
                   constraints:
                     nullable: false
 
         - createTable:
             tableName: users_events
             columns:
+              - column:
+                  name: id
+                  type: integer
+                  autoIncrement: true
+                  constraints:
+                    primeryKey: true
+                    primaryKeyName: pk_users
+                    nullable: false
+                    unique: true
+
               - column:
                   name: user_id
                   type: integer
@@ -171,13 +191,23 @@ databaseChangeLog:
 
               - column:
                   name: role
-                  type: varchar(30)
+                  type: varchar
                   constraints:
                     nullable: false
 
         - createTable:
             tableName: users_to_do_lists
             columns:
+              - column:
+                  name: id
+                  type: integer
+                  autoIncrement: true
+                  constraints:
+                    primeryKey: true
+                    primaryKeyName: pk_users
+                    nullable: false
+                    unique: true
+
               - column:
                   name: user_id
                   type: integer
@@ -196,7 +226,7 @@ databaseChangeLog:
 
               - column:
                   name: role
-                  type: varchar(30)
+                  type: varchar
                   constraints:
                     nullable: false
 
@@ -221,6 +251,6 @@ databaseChangeLog:
 
               - column:
                   name: tag
-                  type: varchar(30)
+                  type: varchar
                   constraints:
                     nullable: false
