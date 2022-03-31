@@ -7,12 +7,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@EqualsAndHashCode(callSuper = true)
-@Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
+@AllArgsConstructor
 @Table(name = "users_events")
 public class UserEvent extends BaseEntity {
 

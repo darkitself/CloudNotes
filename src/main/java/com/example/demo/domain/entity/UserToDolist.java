@@ -7,12 +7,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@EqualsAndHashCode(callSuper = true)
-@Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
+@AllArgsConstructor
 @Table(name = "users_to_do_lists")
 public class UserToDolist extends BaseEntity  {
 

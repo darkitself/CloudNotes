@@ -29,12 +29,11 @@ public class SecurityServiceImpl implements SecurityService {
 
     @Override
     public User registration(RegistrationRequest request) {
-        return userRepository.save(User.builder()
-                .login(request.getLogin())
-                .email(request.getEmail())
-                .password(encoder.encode(request.getPassword()))
-                .build()
-        );
+        return userRepository.save(new User(
+                request.getLogin(),
+                encoder.encode(request.getPassword()),
+                request.getEmail()
+        ));
     }
 
     @Override

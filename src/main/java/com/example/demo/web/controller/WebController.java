@@ -19,4 +19,9 @@ public class WebController {
     public String registration() {
         return "registration";
     }
+
+    @GetMapping("/api/events/create")
+    public String create_event() {
+        return "event_creation";
+    }
 }
