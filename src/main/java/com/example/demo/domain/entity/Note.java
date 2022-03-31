@@ -6,11 +6,9 @@ import org.springframework.lang.Nullable;
 import javax.persistence.*;
 import java.util.Set;
 
-@EqualsAndHashCode(callSuper = true)
-@Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "notes")
 public class Note extends BaseEntity {

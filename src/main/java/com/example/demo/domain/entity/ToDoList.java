@@ -7,11 +7,9 @@ import javax.persistence.*;
 import java.util.Set;
 
 
-@EqualsAndHashCode(callSuper = true)
-@Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "to_do_lists")
 public class ToDoList extends BaseEntity {
