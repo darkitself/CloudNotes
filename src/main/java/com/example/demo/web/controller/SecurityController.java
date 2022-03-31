@@ -20,11 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 public class SecurityController {
     SecurityService securityService;
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
-
     @PostMapping("/login")
     public String login(@ModelAttribute LoginRequest request, Model model) {
         model.addAttribute("email", securityService.login(request));
