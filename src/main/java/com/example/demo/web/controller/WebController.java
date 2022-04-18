@@ -24,4 +24,14 @@ public class WebController {
     public String create_event() {
         return "event_creation";
     }
+
+    @GetMapping("/api/notes/create")
+    public String create_note() {
+        return "note_creation";
+    }
+
+    @GetMapping("/api/todolists/create")
+    public String create_todolist() {
+        return "todolist_creation";
+    }
 }
