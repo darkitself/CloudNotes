@@ -13,6 +13,8 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -28,5 +30,27 @@ public class NoteServiceImpl implements NoteService {
         UserNote userNote = new UserNote(user, note, "OWNER");
         note.getUsers().add(userNote);
         return noteRepository.save(note);
+    }
+
+    @Override
+    public Note getNote(int id) {
+        return noteRepository.getById(id);
+    }
+
+    @Override
+    public List<Note> getAllNotes() {
+        return noteRepository.findAll();
+    }
+
+    @Override
+    public Note update(int id, NoteRequest request) {
+        Note note = getNote(id);
+        note.setNote(request.getNote());
+        return noteRepository.save(note);
+    }
+
+    @Override
+    public void delete(int id) {
+        noteRepository.deleteById(id);
     }
 }
