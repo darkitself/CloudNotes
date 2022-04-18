@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -13,12 +14,16 @@ import java.util.Set;
 @Table(name = "notes")
 public class Note extends BaseEntity {
 
-    private String name;
+    public Note(String name, String note) {
+        this.name = name;
+        this.note = note;
+    }
 
+    private String name;
     private String note;
 
     @OneToMany(mappedBy = "note", cascade = CascadeType.ALL)
-    private Set<UserNote> users;
+    private Set<UserNote> users = new HashSet<>();
 
     @Nullable
     @ManyToOne

@@ -1,9 +1,9 @@
 <#import "parts/common.ftlh" as c>
 
 <@c.page>
-    <form action="/todolists/create" method="post">
-        <div><label> Login : <input type="text" name="login"/> </label></div>
-        <div><label> Password: <input type="password" name="password"/> </label></div>
-        <div><input type="submit" value="Sign In"/></div>
+    <form action="/api/todolists/create" method="post">
+        <div><label> Task : <input type="text" name="name"/> </label></div>
+        <div><textarea name="toDoList"></textarea></div>
+        <div><input type="submit" value="Create"/></div>
     </form>
 </@c.page>
