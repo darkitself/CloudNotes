@@ -1,17 +1,19 @@
 package com.example.demo.domain.entity;
 
-import lombok.*;
+import com.example.demo.web.dto.request.event.CreateEventRequest;
+import com.example.demo.web.dto.request.event.UpdateEventRequest;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import java.beans.ConstructorProperties;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -20,11 +22,6 @@ import java.util.Set;
 @Entity
 @Table(name = "events")
 public class Event extends BaseEntity {
-
-    public Event(String name, Instant date) {
-        this.name = name;
-        this.date = date;
-    }
 
     private String name;
     private Instant date;
@@ -37,4 +34,21 @@ public class Event extends BaseEntity {
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private Set<ToDoList> toDoLists = new HashSet<>();
+
+    private Event(String name, Instant date) {
+        this.name = name;
+        this.date = date;
+    }
+
+    public static Event createFrom(CreateEventRequest createRequest) {
+        return new Event(createRequest.getName(), LocalDateTime.parse(createRequest.getDate())
+                .toInstant(ZoneOffset.UTC));
+    }
+
+    public Event updateFrom(UpdateEventRequest updateRequest) {
+        name = updateRequest.getName();
+        date = LocalDateTime.parse(updateRequest.getDate())
+                .toInstant(ZoneOffset.UTC);
+        return this;
+    }
 }

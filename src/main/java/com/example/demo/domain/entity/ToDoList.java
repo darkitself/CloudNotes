@@ -5,6 +5,8 @@ import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -14,13 +16,14 @@ import java.util.Set;
 @Table(name = "to_do_lists")
 public class ToDoList extends BaseEntity {
 
-    public ToDoList(String name, String toDoList) {
+    public ToDoList(String name) {
         this.name = name;
-        this.toDoList = toDoList;
     }
 
     private String name;
-    private String toDoList;
+
+    @OneToMany(mappedBy = "toDoList", cascade = CascadeType.ALL)
+    private List<Task> tasks = new LinkedList<>();
 
     @OneToMany(mappedBy = "toDoList", cascade = CascadeType.ALL)
     private Set<UserToDolist> users = new HashSet<>();

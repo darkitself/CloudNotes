@@ -112,12 +112,6 @@ databaseChangeLog:
                     nullable: false
 
               - column:
-                  name: to_do_list
-                  type: varchar
-                  constraints:
-                    nullable: true
-
-              - column:
                   name: event_id
                   type: integer
                   constraints:
@@ -134,7 +128,7 @@ databaseChangeLog:
                   autoIncrement: true
                   constraints:
                     primeryKey: true
-                    primaryKeyName: pk_users
+                    primaryKeyName: pk_users_notes
                     nullable: false
                     unique: true
 
@@ -169,7 +163,7 @@ databaseChangeLog:
                   autoIncrement: true
                   constraints:
                     primeryKey: true
-                    primaryKeyName: pk_users
+                    primaryKeyName: pk_users_events
                     nullable: false
                     unique: true
 
@@ -204,7 +198,7 @@ databaseChangeLog:
                   autoIncrement: true
                   constraints:
                     primeryKey: true
-                    primaryKeyName: pk_users
+                    primaryKeyName: pk_users_to_do_lists
                     nullable: false
                     unique: true
 
@@ -231,26 +225,65 @@ databaseChangeLog:
                     nullable: false
 
         - createTable:
-            tableName: favorite_users
+            tableName: users_contacts
             columns:
+              - column:
+                  name: id
+                  type: integer
+                  autoIncrement: true
+                  constraints:
+                    primeryKey: true
+                    primaryKeyName: pk_users_contacts
+                    nullable: false
+                    unique: true
               - column:
                   name: owner_id
                   type: integer
                   constraints:
                     references: users(id)
-                    foreignKeyName: fk_favoriteUsersOwner_users
+                    foreignKeyName: fk_usersContactsOwner_users
                     nullable: false
 
               - column:
-                  name: favorite_id
+                  name: contact_id
                   type: integer
                   constraints:
                     references: users(id)
-                    foreignKeyName: fk_favoriteUsersFavorite_users
+                    foreignKeyName: fk_usersContactsContact_users
                     nullable: false
 
               - column:
                   name: tag
                   type: varchar
                   constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: tasks
+            columns:
+              - column:
+                  name: id
+                  type: integer
+                  autoIncrement: true
+                  constraints:
+                    primeryKey: true
+                    primaryKeyName: pk_tasks
+                    nullable: false
+                    unique: true
+              - column:
+                  name: task
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: state
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: to_do_list_id
+                  type: integer
+                  constraints:
+                    references: to_do_lists(id)
+                    foreignKeyName: fk_tasks_toDoLists
                     nullable: false

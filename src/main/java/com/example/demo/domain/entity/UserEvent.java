@@ -1,11 +1,9 @@
 package com.example.demo.domain.entity;
 
+import com.example.demo.domain.enums.UserRole;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -23,5 +21,6 @@ public class UserEvent extends BaseEntity {
     @JoinColumn(name = "event_id")
     private Event event;
 
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 }

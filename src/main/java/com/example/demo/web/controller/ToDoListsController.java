@@ -1,7 +1,7 @@
 package com.example.demo.web.controller;
 
 import com.example.demo.service.ToDoListService;
-import com.example.demo.web.dto.ToDoListRequest;
+import com.example.demo.web.dto.request.CreateToDoListRequest;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -17,8 +17,13 @@ public class ToDoListsController {
 
     ToDoListService toDoListService;
 
+    @GetMapping("/create")
+    public String createToDoList() {
+        return "todolist_creation";
+    }
+
     @PostMapping("/create")
-    public String create_todolists(@ModelAttribute ToDoListRequest request, Model model) {
+    public String createToDoList(@ModelAttribute CreateToDoListRequest request, Model model) {
         model.addAttribute("email", toDoListService.create(request));
         return "greeting";
     }

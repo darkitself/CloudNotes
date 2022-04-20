@@ -1,8 +1,7 @@
 package com.example.demo.web.controller;
 
 import com.example.demo.service.EventsService;
-import com.example.demo.web.dto.EventRequest;
-import com.example.demo.web.dto.LoginRequest;
+import com.example.demo.web.dto.request.event.CreateEventRequest;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -18,8 +17,13 @@ public class EventsController {
 
     EventsService eventsService;
 
+    @GetMapping("/create")
+    public String createEvent() {
+        return "event_creation";
+    }
+
     @PostMapping("/create")
-    public String create_event(@ModelAttribute EventRequest request, Model model) {
+    public String createEvent(@ModelAttribute CreateEventRequest request, Model model) {
         model.addAttribute("email", eventsService.create(request));
         return "greeting";
     }
