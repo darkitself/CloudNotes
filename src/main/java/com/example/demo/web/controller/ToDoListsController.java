@@ -25,6 +25,6 @@ public class ToDoListsController {
     @PostMapping("/create")
     public String createToDoList(@ModelAttribute CreateToDoListRequest request, Model model) {
         model.addAttribute("email", toDoListService.create(request));
-        return "greeting";
+        return "main";
     }
 }

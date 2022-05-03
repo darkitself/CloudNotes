@@ -2,7 +2,7 @@
 
 <@c.page>
     <div>Hello, ${email}</div>
-    <a href="/api/events/create">Events</a>
+    <a href="/api/events/">Events</a>
     <a href="/api/notes/">Notes</a>
-    <a href="">To Do Lists</a>
+    <a href="/api/todolists/">To Do Lists</a>
 </@c.page>

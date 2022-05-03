@@ -1,13 +1,14 @@
 package com.example.demo.web.dto.request;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.experimental.FieldDefaults;
 
 import javax.validation.constraints.NotBlank;
 
 @Data
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class LoginRequest {
-    @NotBlank
-    private String login;
-    @NotBlank
-    private String password;
+    String login;
+    String password;
 }

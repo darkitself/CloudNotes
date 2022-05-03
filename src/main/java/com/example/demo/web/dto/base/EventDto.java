@@ -1,19 +1,33 @@
 package com.example.demo.web.dto.base;
 
+import com.example.demo.domain.entity.Event;
+import com.example.demo.web.dto.base.shorten.ShortEventDto;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.experimental.FieldDefaults;
 
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
 @Data
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class EventDto {
-    private String name;
-    private Instant date;
+    Long id;
+    String name;
+    Instant date;
 
-    private Set<UserDto> users = new HashSet<>();
+    Set<UserDto> users = new HashSet<>();
 
-    private Set<NoteDto> notes = new HashSet<>();
+    Set<NoteDto> notes = new HashSet<>();
 
-    private Set<ToDoListDto> toDoLists = new HashSet<>();
+    Set<ToDoListDto> toDoLists = new HashSet<>();
+
+    public static EventDto from(Event event) {
+        return new EventDto(
+                event.getId(),
+                event.getName(),
+                event.getDate()
+        );
+    }
 }

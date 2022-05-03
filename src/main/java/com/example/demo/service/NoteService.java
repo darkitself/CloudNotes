@@ -1,16 +1,16 @@
 package com.example.demo.service;
 
 import com.example.demo.domain.entity.Note;
-import com.example.demo.web.dto.request.CreateNoteRequest;
-
-import java.util.List;
+import com.example.demo.web.dto.request.note.CreateNoteRequest;
+import com.example.demo.web.dto.response.note.GetNoteResponse;
+import com.example.demo.web.dto.response.note.GetUserNotesResponse;
 
 public interface NoteService {
     Note create(CreateNoteRequest request);
 
-    Note getNote(Long id);
+    GetNoteResponse getNote(Long id);
 
-    List<Note> getAllNotes();
+    GetUserNotesResponse getAllNotes();
 
     Note update(Long id, CreateNoteRequest request);
 

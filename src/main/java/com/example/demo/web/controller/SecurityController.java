@@ -26,7 +26,7 @@ public class SecurityController {
     @PostMapping("/login")
     public String login(@ModelAttribute LoginRequest request, Model model) {
         model.addAttribute("email", securityService.login(request));
-        return "greeting";
+        return "main";
     }
 
     @GetMapping("/registration")

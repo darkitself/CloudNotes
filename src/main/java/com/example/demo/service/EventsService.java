@@ -5,15 +5,17 @@ import com.example.demo.web.dto.request.event.CreateEventRequest;
 import com.example.demo.web.dto.request.event.DeleteEventRequest;
 import com.example.demo.web.dto.request.event.GetEventRequest;
 import com.example.demo.web.dto.request.event.UpdateEventRequest;
+import com.example.demo.web.dto.response.event.GetEventResponse;
+import com.example.demo.web.dto.response.event.GetUserEventsResponse;
 
 import java.util.List;
 
 public interface EventsService {
     Event create(CreateEventRequest request);
 
-    Event getEvent(GetEventRequest request);
+    GetEventResponse getEvent(Long eventId);
 
-    List<Event> getAllEvents();
+    GetUserEventsResponse getAllEvents();
 
     Event update(UpdateEventRequest request);
 

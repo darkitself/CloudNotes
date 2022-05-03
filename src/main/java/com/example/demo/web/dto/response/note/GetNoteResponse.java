@@ -1,18 +1,15 @@
-package com.example.demo.web.dto.response.event;
+package com.example.demo.web.dto.response.note;
 
 
 import com.example.demo.domain.enums.UserRole;
-import com.example.demo.web.dto.base.EventDto;
-import com.example.demo.web.dto.base.UserDto;
+import com.example.demo.web.dto.base.NoteDto;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
-import java.util.List;
-
 @Data
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
-public class GetEventResponse {
+public class GetNoteResponse {
     UserRole role;
-    EventDto event;
+    NoteDto note;
 }

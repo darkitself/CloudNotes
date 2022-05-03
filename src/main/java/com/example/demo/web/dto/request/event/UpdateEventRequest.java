@@ -1,16 +1,16 @@
 package com.example.demo.web.dto.request.event;
 
+import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NonNull;
+import lombok.experimental.FieldDefaults;
 
 import javax.validation.constraints.NotBlank;
 
 @Data
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class UpdateEventRequest {
-    @NonNull
-    private Long eventId;
-    @NotBlank
-    private String name;
-    @NotBlank
-    private String date;
+    @NonNull Long eventId;
+    @NotBlank String name;
+    @NotBlank String date;
 }

@@ -1,12 +1,11 @@
 <#import "parts/common.ftlh" as c>
-
+<#import "parts/delete.ftlh" as d>
 <@c.page>
     <a href="/api/notes/create">Create note</a>
     <div>Note list</div>
-    <#list notes as note>
+    <#list response.getUserNotes() as note>
         <div>
-            <b>${note.getName()}</b>
-            <p>${note.getNote()}</p>
+            <a href="/api/notes/${note.getId()}"><b>${note.getName()}</b></a> <@d.delete "/api/notes/delete" "${note.getId()}" "${note.getRole()}"/>
             <br>
         </div>
     </#list>

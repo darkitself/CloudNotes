@@ -8,10 +8,14 @@ import com.example.demo.domain.repository.EventRepository;
 import com.example.demo.domain.repository.UserEventRepository;
 import com.example.demo.service.EventsService;
 import com.example.demo.service.PrincipalService;
+import com.example.demo.web.dto.base.EventDto;
+import com.example.demo.web.dto.base.shorten.ShortEventDto;
 import com.example.demo.web.dto.request.event.CreateEventRequest;
 import com.example.demo.web.dto.request.event.DeleteEventRequest;
 import com.example.demo.web.dto.request.event.GetEventRequest;
 import com.example.demo.web.dto.request.event.UpdateEventRequest;
+import com.example.demo.web.dto.response.event.GetEventResponse;
+import com.example.demo.web.dto.response.event.GetUserEventsResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -20,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -41,17 +46,23 @@ public class EventsServiceImpl implements EventsService {
     }
 
     @Override
-    public Event getEvent(GetEventRequest request) {
+    public GetEventResponse getEvent(Long eventId) {
         User user = principalService.getUser();
-        Optional<UserEvent> userEvent = userEventRepository.findByEventIdAndUser(request.getEventId(), user);
+        Optional<UserEvent> userEvent = userEventRepository.findByEventIdAndUser(eventId, user);
         if (userEvent.isEmpty() || !userEvent.get().getRole().canView())
             return null;
-        return userEvent.get().getEvent();
+        return new GetEventResponse(userEvent.get().getRole(),
+                EventDto.from(userEvent.get().getEvent()));
     }
 
     @Override
-    public List<Event> getAllEvents() {
-        return eventRepository.findAll();
+    public GetUserEventsResponse getAllEvents() {
+        User user = principalService.getUser();
+        List<ShortEventDto> events = userEventRepository
+                .findAllByUser(user).stream()
+                .map(ue -> ShortEventDto.from(ue.getEvent(), ue.getRole()))
+                .collect(Collectors.toList());
+        return new GetUserEventsResponse(events);
     }
 
     @Override

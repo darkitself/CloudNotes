@@ -25,6 +25,18 @@ public class EventsController {
     @PostMapping("/create")
     public String createEvent(@ModelAttribute CreateEventRequest request, Model model) {
         model.addAttribute("email", eventsService.create(request));
-        return "greeting";
+        return "main";
+    }
+
+    @GetMapping("/{eventId}")
+    public String getEvent(@PathVariable Long eventId, Model model) {
+        model.addAttribute("response", eventsService.getEvent(eventId));
+        return "event";
+    }
+
+    @GetMapping("/")
+    public String getAllEvents(Model model) {
+        model.addAttribute("response", eventsService.getAllEvents());
+        return "events";
     }
 }
