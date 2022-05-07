@@ -1,4 +1,4 @@
-package com.example.demo.web.dto.request.event;
+package com.example.demo.web.dto.request.note;
 
 import lombok.AccessLevel;
 import lombok.Data;
@@ -9,6 +9,7 @@ import javax.validation.constraints.NotBlank;
 
 @Data
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
-public class DeleteEventRequest {
-    @NonNull Long eventId;
+public class UpdateNoteRequest {
+    @NotBlank String name;
+    @NotBlank String note;
 }

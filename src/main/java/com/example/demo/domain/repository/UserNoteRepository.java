@@ -1,7 +1,6 @@
 package com.example.demo.domain.repository;
 
 import com.example.demo.domain.entity.User;
-import com.example.demo.domain.entity.UserEvent;
 import com.example.demo.domain.entity.UserNote;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

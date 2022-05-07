@@ -34,7 +34,7 @@ public class EventsController {
         return "event";
     }
 
-    @GetMapping("/")
+    @GetMapping("/all")
     public String getAllEvents(Model model) {
         model.addAttribute("response", eventsService.getAllEvents());
         return "events";

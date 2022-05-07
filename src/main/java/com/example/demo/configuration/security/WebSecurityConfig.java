@@ -31,10 +31,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().
-                authorizeRequests()
-                .antMatchers("/api/**").hasAuthority("USER")
-                .antMatchers("/**").permitAll()
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/api/**")
+                    .hasAuthority("USER")
+                .antMatchers("/**")
+                    .permitAll()
                 .and()
                 .logout()
                 .logoutSuccessUrl("/login");
@@ -45,10 +47,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
                 .usersByUsernameQuery(
-                        "select login, password, 'true' from users " +
-                                "where login=?")
+                        "select login, password, 'true' from users where login=?")
                 .authoritiesByUsernameQuery(
-                        "select login, 'USER' from users " +
-                                "where login=?");
+                        "select login, 'USER' from users where login=?");
     }
 }

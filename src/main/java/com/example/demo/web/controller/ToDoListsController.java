@@ -27,4 +27,9 @@ public class ToDoListsController {
         model.addAttribute("email", toDoListService.create(request));
         return "main";
     }
+
+    @GetMapping("/all")
+    public String getAllToDoLists() {
+        return "todolist_creation";
+    }
 }

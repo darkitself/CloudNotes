@@ -1,4 +1,4 @@
-<#import "parts/common.ftlh" as c>
+<#import "../parts/common.ftlh" as c>
 
 <@c.page>
     <form action="/api/notes/create" method="post">

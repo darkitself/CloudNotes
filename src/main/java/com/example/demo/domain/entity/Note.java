@@ -1,5 +1,6 @@
 package com.example.demo.domain.entity;
 
+import com.example.demo.web.dto.request.note.UpdateNoteRequest;
 import lombok.*;
 import org.springframework.lang.Nullable;
 
@@ -29,4 +30,9 @@ public class Note extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "event_id")
     private Event event;
+
+    public void updateFrom(UpdateNoteRequest updateRequest) {
+        name = updateRequest.getName();
+        note = updateRequest.getNote();
+    }
 }
