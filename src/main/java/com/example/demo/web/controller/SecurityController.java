@@ -8,9 +8,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequiredArgsConstructor
@@ -19,7 +22,9 @@ public class SecurityController {
     SecurityService securityService;
 
     @GetMapping("/login")
-    public String login() {
+    public String login(ModelMap model) {
+        if (!model.containsAttribute("login")) model.addAttribute("login", "");
+        System.out.println(model.getAttribute("login"));
         return "login";
     }
 
@@ -35,7 +40,9 @@ public class SecurityController {
     }
 
     @PostMapping("/registration")
-    public String registration(@ModelAttribute RegistrationRequest request) {
-        return securityService.registration(request).getLogin();
+    public ModelAndView registration(@ModelAttribute RegistrationRequest request, RedirectAttributes model) {
+        securityService.registration(request);
+        model.addFlashAttribute("login", request.getLogin());
+        return new ModelAndView("redirect:/login", model.getFlashAttributes());
     }
 }

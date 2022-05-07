@@ -1,6 +1,6 @@
-<#macro login path button_text>
+<#macro login path button_text login>
     <form action="${path}" method="post">
-        <div><label> Login : <input type="text" name="login"/> </label></div>
+        <div><label> Login : <input type="text" name="login" value="${login}"/></label></div>
         <div><label> Password: <input type="password" name="password"/> </label></div>
         <#nested>
         <input type="submit" value="${button_text}"/>
