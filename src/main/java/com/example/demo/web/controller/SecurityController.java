@@ -23,8 +23,8 @@ public class SecurityController {
 
     @GetMapping("/login")
     public String login(ModelMap model) {
-        if (!model.containsAttribute("login")) model.addAttribute("login", "");
-        System.out.println(model.getAttribute("login"));
+        if (!model.containsAttribute("login"))
+            model.addAttribute("login", "");
         return "login";
     }
 
