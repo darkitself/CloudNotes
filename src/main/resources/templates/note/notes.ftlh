@@ -5,7 +5,7 @@
     <div>Notes</div>
     <#list response.getUserNotes() as note>
         <div>
-            <a href="/api/note/${note.getId()}"><b>${note.getName()}</b></a> <@d.delete "/api/note/delete" "${note.getId()}" "${note.getRole()}"/>
+            <a href="/api/note/${note.getId()}"><b>${note.getName()}</b></a> <@d.delete "/api/note/delete" "${note.getId()}" "OWNER"/>
         </div>
         <br>
     </#list>

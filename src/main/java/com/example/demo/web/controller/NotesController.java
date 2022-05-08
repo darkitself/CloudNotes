@@ -52,12 +52,16 @@ public class NotesController {
     public ModelAndView updateNote(@PathVariable Long noteId, @ModelAttribute UpdateNoteRequest request, ModelMap model) {
         noteService.update(noteId, request);
         model.addAttribute("response", noteService.getAllNotes());
-        return new ModelAndView(String.format("redirect:/api/notes/%d", noteId), model);
+        if (!model.containsAttribute("message"))
+            model.addAttribute("message", "Update successful");
+        return new ModelAndView(String.format("redirect:/api/note/%d", noteId), model);
     }
 
     @GetMapping("/{noteId}")
     public String getNote(@PathVariable Long noteId, Model model) {
         model.addAttribute("response", noteService.getNote(noteId));
+        if (!model.containsAttribute("message"))
+            model.addAttribute("message", "");
         return "note/note";
     }
 
