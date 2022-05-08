@@ -11,9 +11,8 @@ import lombok.experimental.FieldDefaults;
 public class ShortNoteDto {
     Long id;
     String name;
-    UserRole role;
 
-    public static ShortNoteDto from(Note note, UserRole role) {
-        return new ShortNoteDto(note.getId(), note.getName(), role);
+    public static ShortNoteDto from(Note note) {
+        return new ShortNoteDto(note.getId(), note.getName());
     }
 }

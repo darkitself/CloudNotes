@@ -35,31 +35,6 @@ databaseChangeLog:
                     nullable: false
 
         - createTable:
-            tableName: events
-            columns:
-              - column:
-                  name: id
-                  type: integer
-                  autoIncrement: true
-                  constraints:
-                    primeryKey: true
-                    primaryKeyName: pk_events
-                    nullable: false
-                    unique: true
-
-              - column:
-                  name: name
-                  type: varchar
-                  constraints:
-                    nullable: false
-
-              - column:
-                  name: date
-                  type: timestamp
-                  constraints:
-                    nullable: false
-
-        - createTable:
             tableName: notes
             columns:
               - column:
@@ -85,11 +60,11 @@ databaseChangeLog:
                     nullable: true
 
               - column:
-                  name: event_id
+                  name: user_id
                   type: integer
                   constraints:
-                    references: events(id)
-                    foreignKeyName: fk_notes_events
+                    references: users(id)
+                    foreignKeyName: fk_notes_users
                     nullable: true
 
         - createTable:
@@ -107,84 +82,6 @@ databaseChangeLog:
 
               - column:
                   name: name
-                  type: varchar
-                  constraints:
-                    nullable: false
-
-              - column:
-                  name: event_id
-                  type: integer
-                  constraints:
-                    references: events(id)
-                    foreignKeyName: fk_toDoLists_events
-                    nullable: true
-
-        - createTable:
-            tableName: users_notes
-            columns:
-              - column:
-                  name: id
-                  type: integer
-                  autoIncrement: true
-                  constraints:
-                    primeryKey: true
-                    primaryKeyName: pk_users_notes
-                    nullable: false
-                    unique: true
-
-              - column:
-                  name: user_id
-                  type: integer
-                  constraints:
-                    references: users(id)
-                    foreignKeyName: fk_usersNotesUserId_users
-                    nullable: false
-
-              - column:
-                  name: note_id
-                  type: integer
-                  constraints:
-                    references: notes(id)
-                    foreignKeyName: fk_usersNotesNoteId_notes
-                    nullable: false
-
-              - column:
-                  name: role
-                  type: varchar
-                  constraints:
-                    nullable: false
-
-        - createTable:
-            tableName: users_events
-            columns:
-              - column:
-                  name: id
-                  type: integer
-                  autoIncrement: true
-                  constraints:
-                    primeryKey: true
-                    primaryKeyName: pk_users_events
-                    nullable: false
-                    unique: true
-
-              - column:
-                  name: user_id
-                  type: integer
-                  constraints:
-                    references: users(id)
-                    foreignKeyName: fk_usersEventsUserId_users
-                    nullable: false
-
-              - column:
-                  name: event_id
-                  type: integer
-                  constraints:
-                    references: events(id)
-                    foreignKeyName: fk_usersEventsEventId_events
-                    nullable: false
-
-              - column:
-                  name: role
                   type: varchar
                   constraints:
                     nullable: false

@@ -1,8 +1,5 @@
 package com.example.demo.web.controller;
 
-import com.example.demo.domain.entity.BaseEntity;
-import com.example.demo.domain.entity.Event;
-import com.example.demo.domain.repository.EventRepository;
 import com.example.demo.service.NoteService;
 import com.example.demo.web.dto.request.note.CreateNoteRequest;
 import com.example.demo.web.dto.request.note.UpdateNoteRequest;
@@ -15,8 +12,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.stream.Collectors;
-
 @Controller
 @RequestMapping("/api/note")
 @RequiredArgsConstructor
@@ -24,13 +19,9 @@ import java.util.stream.Collectors;
 public class NotesController {
 
     NoteService noteService;
-    EventRepository eventRepository;
 
     @GetMapping("/create")
     public String createNote(Model model) {
-        model.addAttribute("events", eventRepository.findAll()
-                .stream()
-                .collect(Collectors.toMap(BaseEntity::getId, Event::getName)));
         return "note/note_creation";
     }
 
@@ -45,7 +36,7 @@ public class NotesController {
     public ModelAndView deleteNote(@PathVariable Long noteId, ModelMap model) {
         noteService.delete(noteId);
         model.addAttribute("response", noteService.getAllNotes());
-        return new ModelAndView("redirect:/api/notes/all", model);
+        return new ModelAndView("redirect:/api/note/all", model);
     }
 
     @PostMapping("/update/{noteId}")

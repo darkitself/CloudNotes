@@ -1,9 +1,7 @@
 package com.example.demo.web.dto.response.todolist;
 
-
 import com.example.demo.domain.enums.TaskState;
 import com.example.demo.domain.enums.UserRole;
-import com.example.demo.web.dto.base.NoteDto;
 import com.example.demo.web.dto.base.ToDoListDto;
 import lombok.AccessLevel;
 import lombok.Data;

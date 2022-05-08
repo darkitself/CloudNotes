@@ -28,11 +28,6 @@ public class ToDoList extends BaseEntity {
     @OneToMany(mappedBy = "toDoList", cascade = CascadeType.ALL)
     private Set<UserToDoList> users = new HashSet<>();
 
-    @Nullable
-    @ManyToOne
-    @JoinColumn(name = "event_id")
-    private Event event;
-
     public void updateFrom(UpdateToDoListRequest request) {
         name = request.getName();
         request.getTasks().stream().filter(UpdateTaskRequest::isNotEmpty).forEach(tr ->

@@ -4,11 +4,5 @@ databaseChangeLog:
         author: MrLii
         changes:
             - addUniqueConstraint:
-                columnNames: user_id, note_id
-                tableName: users_notes
-            - addUniqueConstraint:
-                columnNames: user_id, event_id
-                tableName: users_events
-            - addUniqueConstraint:
                 columnNames: user_id, to_do_list_id
                 tableName: users_to_do_lists

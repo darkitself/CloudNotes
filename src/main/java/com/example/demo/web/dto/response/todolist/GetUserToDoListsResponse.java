@@ -1,6 +1,5 @@
 package com.example.demo.web.dto.response.todolist;
 
-import com.example.demo.web.dto.base.shorten.ShortNoteDto;
 import com.example.demo.web.dto.base.shorten.ShortToDoListDto;
 import lombok.AccessLevel;
 import lombok.Data;

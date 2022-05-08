@@ -2,10 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.domain.entity.Note;
 import com.example.demo.domain.entity.User;
-import com.example.demo.domain.entity.UserNote;
-import com.example.demo.domain.enums.UserRole;
 import com.example.demo.domain.repository.NoteRepository;
-import com.example.demo.domain.repository.UserNoteRepository;
 import com.example.demo.web.dto.base.NoteDto;
 import com.example.demo.web.dto.base.shorten.ShortNoteDto;
 import com.example.demo.web.dto.request.note.CreateNoteRequest;
@@ -31,33 +28,26 @@ import java.util.stream.Collectors;
 public class NoteService {
 
     NoteRepository noteRepository;
-    UserNoteRepository userNoteRepository;
     PrincipalService principalService;
 
     public Note create(CreateNoteRequest request) {
-        Note note = new Note(request.getName(), request.getNote());
         User user = principalService.getUser();
-        UserNote userNote = new UserNote(user, note, UserRole.OWNER);
-        note.getUsers().add(userNote);
+        Note note = new Note(request.getName(), request.getNote(), user);
         return noteRepository.save(note);
     }
 
     @SneakyThrows
     public GetNoteResponse getNote(Long noteId) {
         User user = principalService.getUser();
-        Optional<UserNote> userNote = userNoteRepository.findByNoteIdAndUser(noteId, user);
-        if (!userNote.orElseThrow(EntityNotFoundException::new)
-                .getRole().canView())
-            throw new IllegalAccessException();
-        return new GetNoteResponse(userNote.get().getRole(),
-                NoteDto.from(userNote.get().getNote()));
+        Optional<Note> note = noteRepository.findByUserIdAndId(user.getId(), noteId);
+        return new GetNoteResponse(NoteDto.from(note.orElseThrow(EntityNotFoundException::new)));
     }
 
     public GetUserNotesResponse getAllNotes() {
         User user = principalService.getUser();
-        List<ShortNoteDto> notes = userNoteRepository
+        List<ShortNoteDto> notes = noteRepository
                 .findAllByUser(user).stream()
-                .map(ue -> ShortNoteDto.from(ue.getNote(), ue.getRole()))
+                .map(ShortNoteDto::from)
                 .collect(Collectors.toList());
         return new GetUserNotesResponse(notes);
     }
@@ -65,21 +55,14 @@ public class NoteService {
     @SneakyThrows
     public void update(Long noteId, UpdateNoteRequest request) {
         User user = principalService.getUser();
-        Optional<UserNote> userNote = userNoteRepository.findByNoteIdAndUser(noteId, user);
-        if (!userNote.orElseThrow(EntityNotFoundException::new)
-                .getRole().canEdit())
-            throw new IllegalAccessException();
-        userNote.get().getNote().updateFrom(request);
+        Optional<Note> note = noteRepository.findByUserIdAndId(user.getId(), noteId);
+        note.orElseThrow(EntityNotFoundException::new).updateFrom(request);
     }
 
     @SneakyThrows
-    public void delete(Long id) {
+    public void delete(Long noteId) {
         User user = principalService.getUser();
-        UserNote userNote = userNoteRepository
-                .findByNoteIdAndUser(id, user)
-                .orElseThrow(EntityNotFoundException::new);
-        if (userNote.getRole().canDelete())
-            noteRepository.deleteById(id);
-        else throw new IllegalAccessException();
+        Optional<Note> note = noteRepository.findByUserIdAndId(user.getId(), noteId);
+        noteRepository.delete(note.orElseThrow(EntityNotFoundException::new));
     }
 }

@@ -1,8 +1,6 @@
 package com.example.demo.web.controller;
 
 import com.example.demo.domain.entity.BaseEntity;
-import com.example.demo.domain.entity.Event;
-import com.example.demo.domain.repository.EventRepository;
 import com.example.demo.service.ToDoListService;
 import com.example.demo.web.dto.request.todolist.CreateTaskRequest;
 import com.example.demo.web.dto.request.todolist.CreateToDoListRequest;
@@ -25,13 +23,9 @@ import java.util.stream.Collectors;
 public class ToDoListsController {
 
     ToDoListService toDoListService;
-    EventRepository eventRepository;
 
     @GetMapping("/create")
     public String createToDoList(Model model) {
-        model.addAttribute("events", eventRepository.findAll()
-                .stream()
-                .collect(Collectors.toMap(BaseEntity::getId, Event::getName)));
         return "todolist/todolist_creation";
     }
 

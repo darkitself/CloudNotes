@@ -25,8 +25,8 @@ public class SecurityService {
     PasswordEncoder encoder;
     PrincipalService principalService;
 
-    public User registration(RegistrationRequest request) {
-        return userRepository.save(new User(
+    public void registration(RegistrationRequest request) {
+        userRepository.save(new User(
                 request.getLogin(),
                 encoder.encode(request.getPassword()),
                 request.getEmail()

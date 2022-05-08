@@ -1,6 +1,5 @@
 package com.example.demo.web.dto.base;
 
-import com.example.demo.domain.entity.Note;
 import com.example.demo.domain.entity.Task;
 import com.example.demo.domain.enums.TaskState;
 import lombok.AccessLevel;
@@ -8,8 +7,6 @@ import lombok.Data;
 import lombok.NonNull;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 
 @Data
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
