@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor
 @Table(name = "users_to_do_lists")
-public class UserToDolist extends BaseEntity  {
+public class UserToDoList extends BaseEntity  {
 
     @ManyToOne
     @JoinColumn(name = "user_id")

@@ -1,6 +1,8 @@
 package com.example.demo.domain.entity;
 
 import com.example.demo.domain.enums.TaskState;
+import com.example.demo.web.dto.request.todolist.CreateTaskRequest;
+import com.example.demo.web.dto.request.todolist.UpdateTaskRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -26,4 +28,17 @@ public class Task extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "to_do_list_id")
     ToDoList toDoList;
+
+    public void updateFrom(UpdateTaskRequest request) {
+        task = request.getTask();
+        state = request.getState();
+    }
+
+    public static Task createFrom(CreateTaskRequest request, ToDoList toDoList) {
+        Task task = new Task();
+        task.setTask(request.getTask());
+        task.setState(TaskState.TO_DO);
+        task.setToDoList(toDoList);
+        return task;
+    }
 }

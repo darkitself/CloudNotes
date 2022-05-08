@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/api/notes")
+@RequestMapping("/api/note")
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class NotesController {
@@ -31,14 +31,14 @@ public class NotesController {
         model.addAttribute("events", eventRepository.findAll()
                 .stream()
                 .collect(Collectors.toMap(BaseEntity::getId, Event::getName)));
-        return "notes/note_creation";
+        return "note/note_creation";
     }
 
     @PostMapping("/create")
     public String createNote(@ModelAttribute CreateNoteRequest request, Model model) {
         noteService.create(request);
         model.addAttribute("response", noteService.getAllNotes());
-        return "notes/notes";
+        return "note/notes";
     }
 
     @PostMapping("/delete/{noteId}")
@@ -58,12 +58,12 @@ public class NotesController {
     @GetMapping("/{noteId}")
     public String getNote(@PathVariable Long noteId, Model model) {
         model.addAttribute("response", noteService.getNote(noteId));
-        return "notes/note";
+        return "note/note";
     }
 
     @GetMapping("/all")
     public String getAllNotes(Model model) {
         model.addAttribute("response", noteService.getAllNotes());
-        return "notes/notes";
+        return "note/notes";
     }
 }

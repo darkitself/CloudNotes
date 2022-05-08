@@ -37,5 +37,5 @@ public class User extends BaseEntity {
     private Set<UserNote> userNotes = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UserToDolist> userToDolists = new HashSet<>();
+    private Set<UserToDoList> userToDolists = new HashSet<>();
 }

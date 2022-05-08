@@ -1,7 +1,7 @@
 <#import "../parts/common.ftlh" as c>
 
 <@c.page>
-    <form action="/api/notes/create" method="post">
+    <form action="/api/note/create" method="post">
         <div><label> Title : <input type="text" name="name"/> </label></div>
         <div><label>
                 <textarea name="note"></textarea>
