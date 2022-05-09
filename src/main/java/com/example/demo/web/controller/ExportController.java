@@ -36,7 +36,7 @@ public class ExportController {
     @SneakyThrows
     @GetMapping("/download")
     public ResponseEntity<ByteArrayResource> export() {
-        byte[] file =objectMapper.writeValueAsBytes(exportService.export());
+        byte[] file = objectMapper.writeValueAsBytes(exportService.export());
         ByteArrayResource resource = new ByteArrayResource(file);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=export.txt")
