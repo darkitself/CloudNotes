@@ -1,11 +1,17 @@
 <#import "../parts/common.ftlh" as c>
-<#import "../parts/delete.ftlh" as d>
 <@c.page>
-    <a href="/api/todolist/create">Create note</a>
+    <div>
+        <a href="/api/main">Main page</a>
+    </div>
+    <div>
+        <a href="/api/todolist/create">Create To Do List</a>
+    </div>
     <div>To Do Lists</div>
     <#list response.userToDoLists as todolist>
         <div>
-            <a href="/api/todolist/${todolist.id}"><b>${todolist.name}</b></a> <@d.delete "/api/todolist/delete" "${todolist.id}" "${todolist.role}"/>
+            <form action="/api/todolist/delete/${todolist.id}" method="post">
+                <a href="/api/todolist/${todolist.id}"><b>${todolist.name}</b></a> <#if todolist.role=='OWNER'> <input type="submit" value="Delete"/></#if>
+            </form>
         </div>
         <br>
     </#list>

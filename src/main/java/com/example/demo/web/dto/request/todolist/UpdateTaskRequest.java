@@ -2,7 +2,6 @@ package com.example.demo.web.dto.request.todolist;
 
 import com.example.demo.domain.enums.TaskState;
 import lombok.Data;
-import org.springframework.util.StringUtils;
 
 @Data
 public class UpdateTaskRequest {
@@ -11,6 +10,6 @@ public class UpdateTaskRequest {
     TaskState state;
 
     public boolean isNotEmpty() {
-        return id != null && StringUtils.hasText(task) && state != null;
+        return id != null && task != null && state != null;
     }
 }

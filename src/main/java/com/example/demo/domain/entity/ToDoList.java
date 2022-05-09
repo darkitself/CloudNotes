@@ -4,6 +4,7 @@ import com.example.demo.web.dto.request.todolist.UpdateTaskRequest;
 import com.example.demo.web.dto.request.todolist.UpdateToDoListRequest;
 import lombok.*;
 import org.springframework.lang.Nullable;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
 import java.util.*;
@@ -21,7 +22,7 @@ public class ToDoList extends BaseEntity {
 
     private String name;
 
-    @OneToMany(mappedBy = "toDoList", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "toDoList", cascade = CascadeType.ALL, orphanRemoval = true)
     @MapKey
     private Map<Long, Task> tasks = new HashMap<>();
 
@@ -34,7 +35,10 @@ public class ToDoList extends BaseEntity {
         {
             if (!tasks.containsKey(tr.getId()))
                 throw new EntityNotFoundException();
-            tasks.get(tr.getId()).updateFrom(tr);
+            if (!StringUtils.hasText(tr.getTask()))
+                tasks.remove(tr.getId());
+            else
+                tasks.get(tr.getId()).updateFrom(tr);
         });
     }
 }

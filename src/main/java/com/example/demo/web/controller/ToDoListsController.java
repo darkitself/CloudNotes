@@ -25,7 +25,7 @@ public class ToDoListsController {
     ToDoListService toDoListService;
 
     @GetMapping("/create")
-    public String createToDoList(Model model) {
+    public String createToDoList() {
         return "todolist/todolist_creation";
     }
 

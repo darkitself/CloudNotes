@@ -9,6 +9,6 @@
         <div><label>
             <textarea name="note" rows="5">${response.note.note}</textarea>
         </label></div>
-        <p><input type="submit" value="Update"><label title=${message}/></p>
+        <p><input type="submit" value="Update"></p>
     </form>
 </@c.page>
