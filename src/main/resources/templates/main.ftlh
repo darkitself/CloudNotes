@@ -4,4 +4,5 @@
     <div>Hello, ${email}</div>
     <a href="/api/note/all">Notes</a>
     <a href="/api/todolist/all">To Do Lists</a>
+    <div><a href="/api/export">Export</a></div>
 </@c.page>

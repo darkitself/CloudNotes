@@ -17,6 +17,12 @@ import javax.persistence.*;
 @Table(name = "tasks")
 public class Task extends BaseEntity {
 
+    public Task(@NonNull String task, @NonNull TaskState state, @NonNull ToDoList toDoList) {
+        this.task = task;
+        this.state = state;
+        this.toDoList = toDoList;
+    }
+
     @NonNull
     String task;
 
@@ -35,10 +41,6 @@ public class Task extends BaseEntity {
     }
 
     public static Task createFrom(CreateTaskRequest request, ToDoList toDoList) {
-        Task task = new Task();
-        task.setTask(request.getTask());
-        task.setState(TaskState.TO_DO);
-        task.setToDoList(toDoList);
-        return task;
+        return new Task(request.getTask(), TaskState.TO_DO, toDoList);
     }
 }

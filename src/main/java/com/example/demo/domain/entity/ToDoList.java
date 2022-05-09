@@ -3,7 +3,6 @@ package com.example.demo.domain.entity;
 import com.example.demo.web.dto.request.todolist.UpdateTaskRequest;
 import com.example.demo.web.dto.request.todolist.UpdateToDoListRequest;
 import lombok.*;
-import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
