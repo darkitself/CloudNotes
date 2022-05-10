@@ -17,12 +17,6 @@ import javax.persistence.*;
 @Table(name = "tasks")
 public class Task extends BaseEntity {
 
-    public Task(@NonNull String task, @NonNull TaskState state, @NonNull ToDoList toDoList) {
-        this.task = task;
-        this.state = state;
-        this.toDoList = toDoList;
-    }
-
     @NonNull
     String task;
 
@@ -34,6 +28,12 @@ public class Task extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "to_do_list_id")
     ToDoList toDoList;
+
+    public Task(@NonNull String task, @NonNull TaskState state, @NonNull ToDoList toDoList) {
+        this.task = task;
+        this.state = state;
+        this.toDoList = toDoList;
+    }
 
     public void updateFrom(UpdateTaskRequest request) {
         task = request.getTask();

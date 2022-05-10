@@ -14,11 +14,6 @@ import java.util.*;
 @Entity
 @Table(name = "to_do_lists")
 public class ToDoList extends BaseEntity {
-
-    public ToDoList(String name) {
-        this.name = name;
-    }
-
     private String name;
 
     @OneToMany(mappedBy = "toDoList", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -27,6 +22,10 @@ public class ToDoList extends BaseEntity {
 
     @OneToMany(mappedBy = "toDoList", cascade = CascadeType.ALL)
     private Set<UserToDoList> users = new HashSet<>();
+
+    public ToDoList(String name) {
+        this.name = name;
+    }
 
     public void updateFrom(UpdateToDoListRequest request) {
         name = request.getName();

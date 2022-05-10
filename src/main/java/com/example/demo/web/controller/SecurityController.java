@@ -34,6 +34,11 @@ public class SecurityController {
         return new ModelAndView("redirect:/api/main");
     }
 
+    @GetMapping("/badcredentials")
+    public String badCredentials() {
+        return "badcredentials";
+    }
+
     @GetMapping("/registration")
     public String registration() {
         return "registration";

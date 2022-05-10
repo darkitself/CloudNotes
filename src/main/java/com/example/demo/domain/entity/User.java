@@ -18,12 +18,6 @@ import java.util.Set;
 @Table(name = "users")
 public class User extends BaseEntity {
 
-    public User(String login, String password, String email) {
-        this.login = login;
-        this.password = password;
-        this.email = email;
-    }
-
     private String login;
 
     private String password;
@@ -35,4 +29,10 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<UserToDoList> userToDolists = new HashSet<>();
+
+    public User(String login, String password, String email) {
+        this.login = login;
+        this.password = password;
+        this.email = email;
+    }
 }

@@ -15,8 +15,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Bean
     public WebServerFactoryCustomizer<ConfigurableServletWebServerFactory> containerCustomizer() {
         return container -> container.addErrorPages(
-                new ErrorPage(HttpStatus.NOT_FOUND, "/api/notFound"),
-                new ErrorPage(HttpStatus.FORBIDDEN, "/login"));
+                    new ErrorPage(HttpStatus.NOT_FOUND, "/api/notFound"),
+                    new ErrorPage(HttpStatus.FORBIDDEN, "/login"));
     }
-
 }
