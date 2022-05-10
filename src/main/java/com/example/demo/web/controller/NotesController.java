@@ -43,8 +43,6 @@ public class NotesController {
     public ModelAndView updateNote(@PathVariable Long noteId, @ModelAttribute UpdateNoteRequest request, ModelMap model) {
         noteService.update(noteId, request);
         model.addAttribute("response", noteService.getAllNotes());
-        if (!model.containsAttribute("message"))
-            model.addAttribute("message", "Update successful");
         return new ModelAndView(String.format("redirect:/api/note/%d", noteId), model);
     }
 

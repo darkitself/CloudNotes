@@ -1,0 +1,9 @@
+html, body{
+    margin:0;
+    padding:20px;
+}
+
+.login_form {
+    margin: auto;
+    width: 400px;
+}
