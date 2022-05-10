@@ -22,4 +22,9 @@ public class MainController {
         model.addAttribute("email", principalService.getUser().getEmail());
         return "main";
     }
+
+    @GetMapping("/notFound")
+    public String notFound(Model model) {
+        return "not_found";
+    }
 }
