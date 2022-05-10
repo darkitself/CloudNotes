@@ -29,7 +29,7 @@ public class SecurityController {
     }
 
     @PostMapping("/login")
-    public ModelAndView login(@ModelAttribute LoginRequest request, Model model) {
+    public ModelAndView login(@ModelAttribute LoginRequest request) {
         securityService.login(request);
         return new ModelAndView("redirect:/api/main");
     }
