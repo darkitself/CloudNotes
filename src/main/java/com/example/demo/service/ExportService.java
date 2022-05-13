@@ -8,11 +8,13 @@ import com.example.demo.web.dto.response.export.ExportNote;
 import com.example.demo.web.dto.response.export.ExportToDoList;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,8 +42,11 @@ public class ExportService {
         return new ExportDto(user.getLogin(), toDoLists, notes);
     }
 
+    @SneakyThrows
     public void restore(ExportDto export) {
-        User user = userRepository.findByLogin(export.getLogin());
+        User user = userRepository.findByLogin(export.getLogin()).get();
+        if (!Objects.equals(export.getLogin(), user.getLogin()))
+            throw new IllegalAccessException();
         List<Note> notes = export.getNotes().stream()
                 .map(n -> Note.from(n, user))
                 .collect(Collectors.toList());
@@ -49,10 +54,9 @@ public class ExportService {
                 .forEach(tdl -> {
                     ToDoList toDoList = toDoListRepository.save(new ToDoList(tdl.getName()));
                     userToDoListRepository.save(new UserToDoList(user, toDoList, UserRole.OWNER));
-                    tdl.getTasks()
-                            .forEach(t -> {
-                                taskRepository.save(new Task(t.getTask(), t.getState(), toDoList));
-                            });
+                    tdl.getTasks().forEach(
+                            t -> taskRepository.save(
+                                    new Task(t.getTask(), t.getState(), toDoList)));
                 });
         noteRepository.saveAll(notes);
     }

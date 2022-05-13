@@ -1,7 +1,6 @@
 package com.example.demo.configuration.security;
 
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 

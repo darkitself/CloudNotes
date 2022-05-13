@@ -26,6 +26,11 @@ public class SecurityService {
     PrincipalService principalService;
 
     public void registration(RegistrationRequest request) {
+        userRepository
+                .findByLogin(request.getLogin())
+                .ifPresent((user) -> {
+                    throw new IllegalArgumentException();
+                });
         userRepository.save(new User(
                 request.getLogin(),
                 encoder.encode(request.getPassword()),

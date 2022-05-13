@@ -23,6 +23,6 @@ public class PrincipalService {
                         .getAuthentication()
                         .getPrincipal())
                 .getUsername();
-        return userRepository.findByLogin(login);
+        return userRepository.findByLogin(login).orElseThrow();
     }
 }
