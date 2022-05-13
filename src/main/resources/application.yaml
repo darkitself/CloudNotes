@@ -4,3 +4,6 @@ spring:
     url: jdbc:postgresql://${DATABASE_URL:localhost}:${DATABASE_PORT:5432}/${DATABASE_NAME:cloudnotes}
     username: ${DATABASE_USERNAME:postgres}
     password: ${DATABASE_PASSWORD:123}
+management:
+  endpoints:
+    enabled-by-default: true
